@@ -21,7 +21,7 @@ fn load_log(path: &PathBuf) -> Result<LoadedLog, String> {
 }
 
 fn list_ld_files(dir: &str) -> Result<Vec<PathBuf>, String> {
-    let rd = std::fs::read_dir(dir).map_err(|e| format!("read dir: {e}"))?;
+    let rd = std::fs::read_dir(dir).map_err(|e| format!("read dir '{}': {e}", dir))?;
     let mut out = vec![];
     for e in rd {
         let e = e.map_err(|e| format!("dir entry: {e}"))?;
@@ -47,7 +47,9 @@ struct App {
 
 impl App {
     fn new() -> Self {
-        let dir = String::from("/home/mechanism/stuff");
+        let dir = std::env::current_dir()
+            .map(|p| p.to_string_lossy().into_owned())
+            .unwrap_or_else(|_| String::from("."));
         let files = list_ld_files(&dir).unwrap_or_default();
         Self { dir, files, dir_err: String::new(), loaded: None, load_err: String::new(),
                filter: String::new(), selected: None, preview: String::new() }
