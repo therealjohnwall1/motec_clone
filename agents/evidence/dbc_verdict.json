@@ -1,0 +1,18 @@
+{
+  "question": "Is a DBC needed to read/display the user's .ld log?",
+  "method": "format-aware channel-name + unit + datatype scan of 20261010-152060004.ld (REA portable-only; no disassembly needed — claim depends on file bytes, which we parsed)",
+  "observed": {
+    "raw_can_frame_channels": 0,
+    "can_like_names": ["CAN 1/2 Bus Utilization (decoded % channels)", "GPS Valid flag", "VCU BM *Valid flags"],
+    "all_587_decode_via": "scale/mul/dec/shift to decimal engineering values (verified: TPS V, G, steering, DC-DC)",
+    "empty_units": 552,
+    "paren_dupes": 27
+  },
+  "inferences": {
+    "dbc_for_reading": "NOT needed — log holds decoded decimal channels, not raw frames",
+    "dbc_for_new_can_logs": "only needed if ingesting raw candump logs (MotecLogGenerator direction)",
+    "val_table_enums": "possibly useful later: numeric state channels (VCU Regen Status, faults) -> text"
+  },
+  "unknowns": ["whether user also has raw candump files", "what 'custom messages' means in their workflow (logger CAN config vs i2 math channels)"],
+  "verdict": "DEFER B4 (full DBC/CAN decode). Do B3 maths/enum display instead."
+}
