@@ -156,7 +156,8 @@ impl App {
         let v = &self.cache[&idx];
         let n = v.len().min(8);
         let vals: Vec<String> = v[..n].iter().map(|x| format!("{:.4}", x)).collect();
-        self.preview = format!("n={} first{}: {}", v.len(), n, vals.join(", "));
+        let (mn, mx) = v.iter().fold((f64::INFINITY, f64::NEG_INFINITY), |(a, b), x| (a.min(*x), b.max(*x)));
+        self.preview = format!("n={} min={:.4} max={:.4} first{}: {}", v.len(), mn, mx, n, vals.join(", "));
     }
 }
 
