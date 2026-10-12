@@ -26,7 +26,16 @@ Goal: read/store/select LD+LDX in a chosen directory and show ALL contained info
 - B5 store/export: library persistence, CSV/MAT/LD export (EDataExtent main/outing/zoom parity), shortcuts for deep folders.
 - B6 parity: track map + XY, histograms, channel report (incl reverse axis), telemetry-stub import. Windows/mac packaging after Linux green.
 
-## REA loop per branch (skill v37 §Plan broader investigations)
-1. Question→evidence map; reuse prior Evidence IDs; smallest overview first; resources+config with code; static-first, runtime only if blocked+available; ledger (observed/inferred/unknown) + `agents/evidence/<branch>.json`.
+## REA loop per branch (skill reverse-engineer-anything v37 — mandatory)
+Route-target-first: LD/LDX logs = binary targets parsed with format-aware decoders (not open_binary); i2 .exe = native target — portable ops only on this host (`inspect_artifact`, `inspect_pe_resources`, `inspect_managed_artifact`); `open_binary`/deep providers only if a Ghidra host appears. Relevant guide only: `references/native-and-artifacts.md`.
+Per skill §Plan broader investigations, each branch does:
+1. Checklist of questions + evidence each answer needs (no re-asking resolved constraints).
+2. Reuse session/artifact identity/prior Evidence IDs (`agents/research/REA_skill_status.md`); no duplicate sessions or repeated identical analysis; no per-call diagnostics/setup.
+3. Smallest useful overview first (summary/detail, paging via `inspect_analysis_view`, never parse previews as canonical).
+4. Resources + config alongside code (PE resources, LDX XML, DBC VAL_TABLE) via format-aware parsers, never filenames/strings alone.
+5. Corroborate statically; runtime observation only if static can't answer AND host runtime exists (none currently — portable-only).
+6. Independent questions in parallel workers with scopes + existing evidence pointers; sequential otherwise.
+7. Ledger per branch: conclusion → Evidence IDs, confidence/type, search boundary, unknowns; export bundle to `agents/evidence/<branch>.json`.
+Finish: plain-language findings tied to evidence, observed vs design separated, `close_binary` if one was opened. Observations / inferences / unknowns kept distinct.
 
 ## Next: user drops real LD/LDX+DBC+custom-message examples (tell me where); I start B0 scaffold.

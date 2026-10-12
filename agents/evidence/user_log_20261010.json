@@ -1,0 +1,46 @@
+{
+  "file": "20261010-152060004.ld (in stuff/, NOT in git — 61MB)",
+  "sha_note": "large user log; kept out of repo, parsed in place",
+  "observed": {
+    "size_bytes": 61268568,
+    "magic": 64,
+    "meta_ptr": 1529590,
+    "data_ptr": 1602378,
+    "event_ptr": 1510931,
+    "date": "10/10/2026",
+    "time": "14:01:50",
+    "venue_header": "Norcal Shootout",
+    "event_name": "NorCal Shootout",
+    "event_session": "Run 3",
+    "event_comment_head": "Faulted mid run; Legacy pl initilization; SR7b; Pack: 17; 25 kW PL; FRONT RIGHT TIRE TEMP IS ACTUALLY REAR LEFT",
+    "event_venue_addr": 6759,
+    "ldx_companion": false,
+    "total_channels": 587,
+    "freqs_Hz": {"1": 29, "5": 1, "10": 117, "20": 122, "25": 154, "50": 24, "100": 140},
+    "datatypes": {"(3,2)_i16": 410, "(5,4)_i32": 177, "float": 0},
+    "duration_s": 1063.0,
+    "spot_checks": {
+      "G Force Lat DAQ": {"raw": 7, "phys": 0.07, "formula": "(7/1*1e-2+0)*1"},
+      "Steering Wheel Angle": {"raw": 1325, "phys": 132.5},
+      "Shock Position FL": {"mul": 3937, "scale": 1000, "dec": 3, "phys0": 0.0},
+      "DC-DC Case Temp.": {"shift": 32, "mul": 9, "scale": 5, "raw": 66, "phys": 406.8}
+    }
+  },
+  "inferences": {
+    "all_integer_log": "no float channels; CAN-derived VCU/VESC log",
+    "suffixes_(2)(4)(5)": "repeated/multiframe channels with same base name — must NOT dedupe",
+    "no_ldx": "B1 uses single-lap fallback"
+  },
+  "unknowns": {
+    "venue_addr_6759": "points into header region; venue string already in header; needs byte-compare with i2 display",
+    "device_serial_type": "ext bytes captured; decode pending B0",
+    "gps_channels": "not yet identified by name scan — B0 channel inventory will flag",
+    "dbc_pairing": "user to supply DBC + custom-message examples"
+  },
+  "design_impact": [
+    "afonso offset assert(==0) MUST GO — shift=32 observed live",
+    "channel cap must exceed 587 (no 200-cap)",
+    "lazy/decimated loading required (61MB, 100Hz x 1063s)",
+    "keep duplicate names; key channels by index+name"
+  ]
+}
