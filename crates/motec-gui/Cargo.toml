@@ -5,5 +5,6 @@ edition = "2021"
 
 [dependencies]
 motec-ld = { path = "../motec-ld" }
-eframe = { version = "=0.32.3", default-features = false, features = ["default_fonts", "glow", "x11", "wayland"] }
-egui = "=0.32.3"
+eframe = { version = "=0.31.1", default-features = false, features = ["default_fonts", "glow", "x11", "wayland"] }
+egui = "=0.31.1"
+egui_plot = "=0.32.1"
