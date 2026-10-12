@@ -1,0 +1,11 @@
+[package]
+name = "motec-ld"
+version = "0.1.0"
+edition = "2021"
+description = "MoTeC .ld/.ldx parser core (forked from MIT afonso360/motec-i2; shift/offset + large-log fixes)"
+license = "MIT"
+
+[dependencies]
+byteorder = "1.5"
+
+[dev-dependencies]

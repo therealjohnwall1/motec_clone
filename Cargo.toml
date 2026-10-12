@@ -1,0 +1,3 @@
+[workspace]
+members = ["crates/motec-ld", "crates/motec-gui"]
+resolver = "2"
